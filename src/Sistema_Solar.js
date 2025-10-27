@@ -78,6 +78,19 @@ function init() {
   loader.load("src/nave_espacial.glb", (gltf) => {
     console.log("¡Nave cargada!");
     nave = gltf.scene;
+    //Para poder iluminar la nave
+    nave.traverse((child) => {
+      if (child.isMesh && child.material) {
+        // Creamos un nuevo material estándar
+        const newMaterial = new THREE.MeshStandardMaterial({
+          // Reutilizamos la textura (map) del material antiguo
+          map: child.material.map,
+        });
+
+        // Reemplazamos el material básico por el nuevo material estándar
+        child.material = newMaterial;
+      }
+    });
     nave.scale.set(0.1, 0.1, 0.1);
     nave.add(cameraNave);
     cameraNave.position.set(0, 10, 45);
@@ -99,7 +112,7 @@ function init() {
   // --- LUCES ---
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
-  const pointLight = new THREE.PointLight(0xffffff, 3.0, 50);
+  const pointLight = new THREE.PointLight(0xffffff, 3.0, 0);
 
   // Plano invisible para clics (horizontal)
   const geometryp = new THREE.PlaneGeometry(60, 60);
