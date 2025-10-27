@@ -17,11 +17,11 @@ const textureLoader = new THREE.TextureLoader();
 
 // Rutas de texturas
 const listaTexturasPlanetas = [
-  "src/2k_mercury.jpg", // Índice 0
-  "src/2k_mars.jpg", // Índice 1
-  "src/2k_venus_surface.jpg", // Índice 2
-  "src/earthmap1k.jpg", // Índice 3
-  "src/2k_neptune.jpg", // Índice 4
+  "src/2k_mercury.jpg",
+  "src/2k_mars.jpg",
+  "src/2k_venus_surface.jpg",
+  "src/earthmap1k.jpg",
+  "src/2k_neptune.jpg",
 ];
 const texturaSol = "src/2k_sun.jpg";
 const texturaLuna = "src/2k_moon.jpg";
@@ -75,34 +75,18 @@ function init() {
 
   // --- CARGADOR DE NAVE ---
   const loader = new GLTFLoader();
-  loader.load(
-    "src/nave_espacial.glb", // Asegúrate de que el nombre es correcto
-    (gltf) => {
-      console.log("¡Nave cargada!");
-      nave = gltf.scene;
-      nave.scale.set(0.1, 0.1, 0.1); // Ajusta la escala si es necesario
-      nave.add(cameraNave);
-      cameraNave.position.set(0, 10, 45); // Posición 3ª persona (detrás y arriba)
+  loader.load("src/nave_espacial.glb", (gltf) => {
+    console.log("¡Nave cargada!");
+    nave = gltf.scene;
+    nave.scale.set(0.1, 0.1, 0.1);
+    nave.add(cameraNave);
+    cameraNave.position.set(0, 10, 45);
 
-      nave.position.set(-25, 0, 0); // Posición inicial de la nave
-      nave.lookAt(-50, 0, 0); // Hacemos que la nave mire al sol
+    nave.position.set(-25, 0, 0);
+    nave.lookAt(-50, 0, 0);
 
-      scene.add(nave);
-    },
-    undefined,
-    (error) => {
-      // Plan B: crear el cono rojo
-      console.error("Error cargando la nave:", error);
-      const naveGeom = new THREE.ConeGeometry(0.3, 1, 8).rotateX(Math.PI / 2);
-      const naveMat = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-      nave = new THREE.Mesh(naveGeom, naveMat);
-      nave.add(cameraNave);
-      cameraNave.position.set(0, 0.2, 0);
-      nave.position.set(-25, 0, 0); // Posición inicial
-      nave.lookAt(0, 0, 0);
-      scene.add(nave);
-    }
-  );
+    scene.add(nave);
+  });
 
   // Renderer
   renderer = new THREE.WebGLRenderer();
@@ -199,7 +183,7 @@ function Planeta(radio, textureUrl, dist, vel, anguloInicial) {
     opacity: 0.3,
   });
   const orbita = new THREE.Line(geome, mate);
-  orbita.rotateX(Math.PI / 2); // Rotamos la órbita al plano X-Z
+  orbita.rotateX(Math.PI / 2);
 
   // Guardamos referencia a la órbita para poder borrarla
   planeta.userData.orbita = orbita;
