@@ -12,7 +12,7 @@ Este proyecto cumple con los requisitos de la tarea, incluyendo iluminación, te
 
 Haz clic en la imagen para ver la demostración completa del proyecto:
 
-[![Demostración del Proyecto](https://i.imgur.com/p7aUwfC.png)](https://youtu.be/8ciEfBqc8Zk?si=8oFBUSC2zZDVzeSc)
+[![Demostración del Proyecto](https://i.imgur.com/p7aUwfC.png)](https://youtu.be/WNeQUpehGMk)
 ---
 
 ## Características Principales
